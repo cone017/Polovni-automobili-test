@@ -21,12 +21,30 @@ public class PolovniAutomobili {
 
         // opening window and cookies problem
         driverFirefox.get("https://www.polovniautomobili.com/");
-
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'js-accept-cookies')]"))).click();
         driverFirefox.manage().window().maximize();
 
-        // finding car brand
-        driverFirefox.findElement(By.xpath("//p[contains(@title,'Sve marke')]")).click();
+        // finding car brand - Fiat (Punto, Grande Punto)
+        driverFirefox.findElement(By.xpath("//span[normalize-space()='Sve marke']")).click();
+        driverFirefox.findElement(By.xpath("//label[normalize-space()='Fiat']")).click();
+        driverFirefox.findElement(By.xpath("//p[contains(@title, 'Svi modeli')]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[normalize-space()='Grande Punto']"))).click();
+        driverFirefox.findElement(By.xpath("//label[normalize-space()='Punto']")).click();
+
+        // filtering range of years of car made - 2005 | 2013
+        driverFirefox.findElement(By.xpath("//p[contains(@title, 'Godište od')]")).click();
+        driverFirefox.findElement(By.xpath("//div[@class='SumoSelect sumo_year_from open']//label[contains(text(),'2005 god.')]")).click();
+        driverFirefox.findElement(By.xpath("//p[contains(@title, ' do') and contains(@class, 'CaptionCont SelectBox')]")).click();
+        driverFirefox.findElement(By.xpath("//div[@class='SumoSelect sumo_year_to open']//label[contains(text(), '2013 god.')]")).click();
+
+        // filtering region - Sumadijski
+        driverFirefox.findElement(By.xpath("//span[normalize-space()='Region']")).click();
+        driverFirefox.findElement(By.xpath("//label[contains(text(),'Šumadijski')]")).click();
+
+        // confirming selection
+        driverFirefox.findElement(By.xpath("//button[@name='submit_1']")).click();
+
+        //driverFirefox.quit();
 
     }
 }
